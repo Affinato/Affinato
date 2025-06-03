@@ -525,6 +525,42 @@ Mais do que servir, a Afinato entrega presença, elegância e afeto através da 
 });
 
   </script>
+<script>
+  // Script para swipe na galeria de imagens no celular
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  // Seleciona todas as divs de lightbox (as imagens ampliadas)
+  const lightboxes = document.querySelectorAll('.lightbox');
+
+  lightboxes.forEach((box, index) => {
+    box.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    box.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe(box, index);
+    });
+  });
+
+  function handleSwipe(currentBox, currentIndex) {
+    const threshold = 50; // distância mínima para considerar swipe
+    const total = lightboxes.length;
+
+    if (touchEndX < touchStartX - threshold) {
+      // Swipe para a esquerda (próxima imagem)
+      const nextIndex = (currentIndex + 1) % total;
+      window.location.hash = lightboxes[nextIndex].id;
+    }
+
+    if (touchEndX > touchStartX + threshold) {
+      // Swipe para a direita (imagem anterior)
+      const prevIndex = (currentIndex - 1 + total) % total;
+      window.location.hash = lightboxes[prevIndex].id;
+    }
+  }
+</script>
 
 </body>
 </html>
