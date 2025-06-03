@@ -166,22 +166,20 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.9);
-  text-align: center;
-  padding-top: 60px;
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
 }
 
-.lightbox img {
-  max-width: 90vw;
-  max-height: 80vh;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.2);
-  margin: auto;
-  display: block;
+.lightbox:target {
+  display: flex;
 }
 
-.lightbox:target {
-  display: block;
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
 }
 
 .lightbox .fechar {
