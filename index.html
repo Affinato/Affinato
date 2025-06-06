@@ -281,6 +281,12 @@
     html {
       scroll-behavior: smooth;
     }
+    
+    .swiper-slide {
+  width: 80%; /* controla o quanto da imagem aparece na tela — pode ajustar */
+  max-width: 300px;
+}
+
   </style>
 </head>
 
@@ -482,21 +488,22 @@
 
 <!-- Script para iniciar o Swiper -->
 <script>
-  const swiper = new Swiper('.swiper', {
-    loop: true,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    grabCursor: true,
-    slidesPerView: 1,
-    spaceBetween: 20,
-    // Detecta swipe com suavidade no mobile
-    simulateTouch: true,
-    touchRatio: 1.2,
-    touchAngle: 45,
-    shortSwipes: true,
-  });
+const swiper = new Swiper('.swiper', {
+  loop: true,
+  centeredSlides: true,
+  slidesPerView: 'auto',
+  spaceBetween: 20,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  grabCursor: true,
+  simulateTouch: true,
+  touchRatio: 1.2,
+  touchAngle: 45,
+  shortSwipes: true,
+});
+
 </script>
 
 
