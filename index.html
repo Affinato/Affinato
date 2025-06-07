@@ -152,18 +152,23 @@
     }
 .swiper {
   width: 100%;
-  max-width: 800px;
-  margin: 40px auto;
+  max-width: 1000px;
+  margin: 0 auto;
   border-radius: 10px;
   overflow: hidden;
 }
 
 .swiper-slide img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
-  display: block;
-  object-fit: cover;
   border-radius: 10px;
+}
+
+.swiper-slide {
+  width: auto;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
 }
 
 /* Esconde os botões no celular */
@@ -329,20 +334,44 @@
 
   <!-- Galeria com Swiper -->
   <div class="swiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide"><img src="Galeria 1.JPG" alt="1"></div>
-      <div class="swiper-slide"><img src="Galeria 2.JPG" alt="2"></div>
-      <div class="swiper-slide"><img src="Galeria 3.JPG" alt="3"></div>
-      <div class="swiper-slide"><img src="Galeria 4.JPG" alt="4"></div>
-      <div class="swiper-slide"><img src="Galeria 5.JPG" alt="5"></div>
-      <div class="swiper-slide"><img src="Galeria 6.JPG" alt="6"></div>
-      <div class="swiper-slide"><img src="Galeria 7.JPG" alt="7"></div>
-      <div class="swiper-slide"><img src="Galeria 8.JPG" alt="8"></div>
-      <div class="swiper-slide"><img src="Galeria 9.JPG" alt="9"></div>
-      <div class="swiper-slide"><img src="Galeria 10.JPG" alt="10"></div>
-      <div class="swiper-slide"><img src="Galeria 11.JPG" alt="11"></div>
-      <div class="swiper-slide"><img src="Galeria 12.JPG" alt="12"></div>
-    </div>
+
+<div class="swiper-wrapper">
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 1.JPG" alt="1"onclick="abrirFullscreen(this)"></div>
+  </div>
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 2.JPG" alt="2"onclick="abrirFullscreen(this)"></div>
+  </div>
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 3.JPG" alt="3"onclick="abrirFullscreen(this)"></div>
+  </div>
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 4.JPG" alt="4"onclick="abrirFullscreen(this)"></div>
+  </div>
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 5.JPG" alt="5"onclick="abrirFullscreen(this)"></div>
+  </div>
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 6.JPG" alt="6"onclick="abrirFullscreen(this)"></div>
+  </div>
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 7.JPG" alt="7"onclick="abrirFullscreen(this)"></div>
+  </div>
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 8.JPG" alt="8"onclick="abrirFullscreen(this)"></div>
+  </div>
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 9.JPG" alt="9"onclick="abrirFullscreen(this)"></div>
+  </div>
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 10.JPG" alt="10"onclick="abrirFullscreen(this)"></div>
+  </div>
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 11.JPG" alt="11"onclick="abrirFullscreen(this)"></div>
+  </div>
+  <div class="swiper-slide">
+    <div class="swiper-zoom-container"><img src="Galeria 12.JPG" alt="12"onclick="abrirFullscreen(this)"></div>
+</div>
 
     <!-- Botões de navegação (visíveis apenas no desktop) -->
     <div class="swiper-button-prev"></div>
@@ -493,19 +522,30 @@ const swiper = new Swiper('.swiper', {
   centeredSlides: true,
   slidesPerView: 'auto',
   spaceBetween: 20,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
   grabCursor: true,
   simulateTouch: true,
   touchRatio: 1.2,
   touchAngle: 45,
   shortSwipes: true,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  zoom: true
 });
-
 </script>
 
+<script>
+  function abrirFullscreen(element) {
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) { /* Safari */
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { /* IE11 */
+      element.msRequestFullscreen();
+    }
+  }
+</script>
 
 </body>
 
