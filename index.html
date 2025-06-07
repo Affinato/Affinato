@@ -291,6 +291,16 @@
   width: 80%; /* controla o quanto da imagem aparece na tela — pode ajustar */
   max-width: 300px;
 }
+.swiper-slide {
+  width: 80%;
+  max-width: 300px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.swiper-slide:hover {
+  transform: scale(1.03);
+}
 
   </style>
 </head>
@@ -337,40 +347,40 @@
 
 <div class="swiper-wrapper">
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 1.JPG" alt="1"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 1.JPG" alt="1"onclick="abrirLightbox(this.src)"></div>
   </div>
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 2.JPG" alt="2"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 2.JPG" alt="2"onclick="abrirLightbox(this.src)"></div>
   </div>
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 3.JPG" alt="3"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 3.JPG" alt="3"onclick="abrirLightbox(this.src)"></div>
   </div>
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 4.JPG" alt="4"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 4.JPG" alt="4"onclick="abrirLightbox(this.src)"></div>
   </div>
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 5.JPG" alt="5"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 5.JPG" alt="5"onclick="abrirLightbox(this.src)"></div>
   </div>
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 6.JPG" alt="6"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 6.JPG" alt="6"onclick="abrirLightbox(this.src)"></div>
   </div>
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 7.JPG" alt="7"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 7.JPG" alt="7"onclick="abrirLightbox(this.src)"></div>
   </div>
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 8.JPG" alt="8"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 8.JPG" alt="8"onclick="abrirLightbox(this.src)"></div>
   </div>
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 9.JPG" alt="9"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 9.JPG" alt="9"onclick="abrirLightbox(this.src)"></div>
   </div>
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 10.JPG" alt="10"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 10.JPG" alt="10"onclick="abrirLightbox(this.src)"></div>
   </div>
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 11.JPG" alt="11"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 11.JPG" alt="11"onclick="abrirLightbox(this.src)"></div>
   </div>
   <div class="swiper-slide">
-    <div class="swiper-zoom-container"><img src="Galeria 12.JPG" alt="12"onclick="abrirFullscreen(this)"></div>
+    <div class="swiper-zoom-container"><img src="Galeria 12.JPG" alt="12"onclick="abrirLightbox(this.src)"></div>
 </div>
 
     <!-- Botões de navegação (visíveis apenas no desktop) -->
@@ -547,6 +557,21 @@ const swiper = new Swiper('.swiper', {
   }
 </script>
 
+<div id="lightbox-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background-color:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:9999;">
+  <span onclick="fecharLightbox()" style="position:absolute; top:20px; right:30px; font-size:35px; color:white; cursor:pointer;">&times;</span>
+  <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; border-radius:10px;">
+</div>
+
 </body>
+<script>
+  function abrirLightbox(src) {
+    document.getElementById("lightbox-img").src = src;
+    document.getElementById("lightbox-modal").style.display = "flex";
+  }
+
+  function fecharLightbox() {
+    document.getElementById("lightbox-modal").style.display = "none";
+  }
+</script>
 
 </html>
