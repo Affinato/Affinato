@@ -79,7 +79,7 @@
 
   <div class="instrucoes">
     <p><strong>Afiliado com CNPJ:</strong> ganhe comissões em dinheiro por cada cliente indicado. Seu código de desconto será automaticamente gerado (ex: <em>nomeFantasia5</em>).</p>
-    <p><strong>Afiliado com CPF:</strong> ganhe bônus em produtos para suas próximas compras. O código será gerado como <em>primeiroSegundoNome5</em>.</p>
+    <p><strong>Afiliado com CPF:</strong> ganhe bônus em produtos para suas próximas compras. O código será gerado como <em>primeiroUltimoNome5</em>.</p>
   </div>
 
   <div class="form-container">
@@ -124,8 +124,8 @@
         <label for="cpf">CPF:</label>
         <input type="text" id="cpf" name="CPF" required>
 
-        <label for="nomeCompleto">Nome Completo:</label>
-        <input type="text" id="nomeCompleto" name="Nome Completo" required>
+        <label for="primeiroUltimoNome">Primeiro e Ultimo Nome:</label>
+        <input type="text" id="primeiroUltimoNome" name="Primeiro e Ultimo Nome" required>
       `;
     }
   }
@@ -138,7 +138,7 @@
       const nomeFantasia = document.getElementById('nomeFantasia').value.trim().replace(/\s+/g, '');
       codigo = nomeFantasia + "5";
     } else {
-      const nomeCompleto = document.getElementById('nomeCompleto').value.trim().split(" ");
+      const nomeCompleto = document.getElementById('primeiroUltimoNome').value.trim().split(" ");
       codigo = nomeCompleto[0] + (nomeCompleto[1] || "") + "5";
     }
 
