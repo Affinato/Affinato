@@ -70,6 +70,7 @@
     button:hover {
       background-color: #1eb14d;
     }
+    
   </style>
 </head>
 <body>
@@ -82,15 +83,23 @@
   </div>
 
   <div class="form-container">
-    <form id="formAfiliado" onsubmit="gerarCodigoEEnviar(); return false;">
-      <label for="tipo">Tipo de Cadastro:</label>
-      <select id="tipo" name="tipo" onchange="atualizarFormulario()" required>
-        <option value="">Selecione...</option>
+    <form action="https://formsubmit.co/affinatosfrios@gmail.com" method="POST" onsubmit="gerarCodigo()" id="formAfiliado">
+      <input type="hidden" name="_subject" value="Novo cadastro de afiliado">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+
+      <label for="tipo">Tipo de cadastro:</label>
+      <select id="tipo" name="Tipo" onchange="atualizarFormulario()" required>
+        <option value="">Selecione</option>
         <option value="cnpj">CNPJ</option>
         <option value="cpf">CPF</option>
       </select>
 
       <div id="camposDinamicos"></div>
+
+      <input type="hidden" id="codigoAfiliado" name="Código Gerado" value="">
+
+      <input type="hidden" name="_next" value="https://affinato.github.io/Affinato/thanks.html">
 
       <button type="submit">Enviar Cadastro</button>
     </form>
@@ -99,49 +108,41 @@
   <script>
     function atualizarFormulario() {
       const tipo = document.getElementById('tipo').value;
-      const container = document.getElementById('camposDinamicos');
-      container.innerHTML = "";
+      const campos = document.getElementById('camposDinamicos');
+      campos.innerHTML = "";
 
-      if (tipo === 'cnpj') {
-        container.innerHTML = `
+      if (tipo === "cnpj") {
+        campos.innerHTML = `
           <label for="cnpj">CNPJ:</label>
-          <input type="text" id="cnpj" name="cnpj" required>
+          <input type="text" id="cnpj" name="CNPJ" required>
 
           <label for="nomeFantasia">Nome Fantasia:</label>
-          <input type="text" id="nomeFantasia" name="nomeFantasia" required>
+          <input type="text" id="nomeFantasia" name="Nome Fantasia" required>
         `;
-      } else if (tipo === 'cpf') {
-        container.innerHTML = `
+      } else if (tipo === "cpf") {
+        campos.innerHTML = `
           <label for="cpf">CPF:</label>
-          <input type="text" id="cpf" name="cpf" required>
+          <input type="text" id="cpf" name="CPF" required>
 
           <label for="nomeCompleto">Nome Completo:</label>
-          <input type="text" id="nomeCompleto" name="nomeCompleto" required>
+          <input type="text" id="nomeCompleto" name="Nome Completo" required>
         `;
       }
     }
 
-    function gerarCodigoEEnviar() {
+    function gerarCodigo() {
       const tipo = document.getElementById('tipo').value;
       let codigo = "";
-      let corpoEmail = "";
 
-      if (tipo === 'cnpj') {
-        const nomeFantasia = document.getElementById('nomeFantasia').value.trim().replace(/\s+/g, "");
-        const cnpj = document.getElementById('cnpj').value;
+      if (tipo === "cnpj") {
+        const nomeFantasia = document.getElementById('nomeFantasia').value.trim().replace(/\s+/g, '');
         codigo = nomeFantasia + "5";
-        corpoEmail = `Novo cadastro CNPJ:\nCNPJ: ${cnpj}\nNome Fantasia: ${nomeFantasia}\nCódigo gerado: ${codigo}`;
       } else {
         const nomeCompleto = document.getElementById('nomeCompleto').value.trim().split(" ");
-        const cpf = document.getElementById('cpf').value;
         codigo = nomeCompleto[0] + (nomeCompleto[1] || "") + "5";
-        corpoEmail = `Novo cadastro CPF:\nCPF: ${cpf}\nNome Completo: ${nomeCompleto.join(" ")}\nCódigo gerado: ${codigo}`;
       }
 
-      const email = "affinatofrios@gmail.com"; // Substitua pelo e-mail real
-      const assunto = encodeURIComponent("Cadastro de Afiliado");
-      const corpo = encodeURIComponent(corpoEmail);
-      window.location.href = `mailto:${email}?subject=${assunto}&body=${corpo}`;
+      document.getElementById('codigoAfiliado').value = codigo;
     }
   </script>
 
