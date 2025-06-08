@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Afiliado | Affinato</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: #5e1919;
+      font-family: "montserrat", sans-serif;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      font-family: "cinzel", serif;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .instrucoes {
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+      font-size: 16px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: auto;
+      background-color: #ffffff10;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      margin-top: 15px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #1eb14d;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Cadastro de Afiliado</h2>
+
+  <div class="instrucoes">
+    <p><strong>Afiliado com CNPJ:</strong> ganhe comissões em dinheiro por cada cliente indicado. Seu código de desconto será automaticamente gerado (ex: <em>nomeFantasia5</em>).</p>
+    <p><strong>Afiliado com CPF:</strong> ganhe bônus em produtos para suas próximas compras. O código será gerado como <em>primeiroSegundoNome5</em>.</p>
+  </div>
+
+  <div class="form-container">
+    <form id="formAfiliado" onsubmit="gerarCodigoEEnviar(); return false;">
+      <label for="tipo">Tipo de Cadastro:</label>
+      <select id="tipo" name="tipo" onchange="atualizarFormulario()" required>
+        <option value="">Selecione...</option>
+        <option value="cnpj">CNPJ</option>
+        <option value="cpf">CPF</option>
+      </select>
+
+      <div id="camposDinamicos"></div>
+
+      <button type="submit">Enviar Cadastro</button>
+    </form>
+  </div>
+
+  <script>
+    function atualizarFormulario() {
+      const tipo = document.getElementById('tipo').value;
+      const container = document.getElementById('camposDinamicos');
+      container.innerHTML = "";
+
+      if (tipo === 'cnpj') {
+        container.innerHTML = `
+          <label for="cnpj">CNPJ:</label>
+          <input type="text" id="cnpj" name="cnpj" required>
+
+          <label for="nomeFantasia">Nome Fantasia:</label>
+          <input type="text" id="nomeFantasia" name="nomeFantasia" required>
+        `;
+      } else if (tipo === 'cpf') {
+        container.innerHTML = `
+          <label for="cpf">CPF:</label>
+          <input type="text" id="cpf" name="cpf" required>
+
+          <label for="nomeCompleto">Nome Completo:</label>
+          <input type="text" id="nomeCompleto" name="nomeCompleto" required>
+        `;
+      }
+    }
+
+    function gerarCodigoEEnviar() {
+      const tipo = document.getElementById('tipo').value;
+      let codigo = "";
+      let corpoEmail = "";
+
+      if (tipo === 'cnpj') {
+        const nomeFantasia = document.getElementById('nomeFantasia').value.trim().replace(/\s+/g, "");
+        const cnpj = document.getElementById('cnpj').value;
+        codigo = nomeFantasia + "5";
+        corpoEmail = `Novo cadastro CNPJ:\nCNPJ: ${cnpj}\nNome Fantasia: ${nomeFantasia}\nCódigo gerado: ${codigo}`;
+      } else {
+        const nomeCompleto = document.getElementById('nomeCompleto').value.trim().split(" ");
+        const cpf = document.getElementById('cpf').value;
+        codigo = nomeCompleto[0] + (nomeCompleto[1] || "") + "5";
+        corpoEmail = `Novo cadastro CPF:\nCPF: ${cpf}\nNome Completo: ${nomeCompleto.join(" ")}\nCódigo gerado: ${codigo}`;
+      }
+
+      const email = "affinatofrios@gmail.com"; // Substitua pelo e-mail real
+      const assunto = encodeURIComponent("Cadastro de Afiliado");
+      const corpo = encodeURIComponent(corpoEmail);
+      window.location.href = `mailto:${email}?subject=${assunto}&body=${corpo}`;
+    }
+  </script>
+
+</body>
+</html>
