@@ -400,8 +400,9 @@ src="https://www.facebook.com/tr?id=585181974623595&ev=PageView&noscript=1"
       muted 
       playsinline 
       preload="none" 
+      data-src="Galeria Video 1.mp4"
       style="width: 100%; border-radius: 10px; cursor: pointer;" 
-      onclick="abrirLightbox(this.src)">
+      onclick="abrirVideoLightbox(this)">
       <source src="Galeria Video 1.mp4" type="video/mp4">
       Seu navegador não suporta vídeos.
     </video>
@@ -415,14 +416,14 @@ src="https://www.facebook.com/tr?id=585181974623595&ev=PageView&noscript=1"
       muted 
       playsinline 
       preload="none" 
+      data-src="Galeria Video 2.mp4"
       style="width: 100%; border-radius: 10px; cursor: pointer;" 
-      onclick="abrirLightbox(this.src)">
+      onclick="abrirVideoLightbox(this)">
       <source src="Galeria Video 2.mp4" type="video/mp4">
       Seu navegador não suporta vídeos.
     </video>
   </div>
 </div>
-
 <div class="swiper-slide">
   <div class="swiper-zoom-container">
     <video 
@@ -431,14 +432,14 @@ src="https://www.facebook.com/tr?id=585181974623595&ev=PageView&noscript=1"
       muted 
       playsinline 
       preload="none" 
+      data-src="Galeria Video 3.mp4"
       style="width: 100%; border-radius: 10px; cursor: pointer;" 
-      onclick="abrirLightbox(this.src)">
+      onclick="abrirVideoLightbox(this)">
       <source src="Galeria Video 3.mp4" type="video/mp4">
       Seu navegador não suporta vídeos.
     </video>
   </div>
 </div>
-
   <div class="swiper-slide">
     <div class="swiper-zoom-container"><img src="Galeria 13.jpg" alt="13"onclick="abrirLightbox(this.src)"></div>
   </div>
@@ -483,8 +484,9 @@ src="https://www.facebook.com/tr?id=585181974623595&ev=PageView&noscript=1"
       muted 
       playsinline 
       preload="none" 
+      data-src="Galeria Video 4.mp4"
       style="width: 100%; border-radius: 10px; cursor: pointer;" 
-      onclick="abrirLightbox(this.src)">
+      onclick="abrirVideoLightbox(this)">
       <source src="Galeria Video 4.mp4" type="video/mp4">
       Seu navegador não suporta vídeos.
     </video>
@@ -498,8 +500,9 @@ src="https://www.facebook.com/tr?id=585181974623595&ev=PageView&noscript=1"
       muted 
       playsinline 
       preload="none" 
+      data-src="Galeria Video 5.mp4"
       style="width: 100%; border-radius: 10px; cursor: pointer;" 
-      onclick="abrirLightbox(this.src)">
+      onclick="abrirVideoLightbox(this)">
       <source src="Galeria Video 5.mp4" type="video/mp4">
       Seu navegador não suporta vídeos.
     </video>
@@ -513,8 +516,9 @@ src="https://www.facebook.com/tr?id=585181974623595&ev=PageView&noscript=1"
       muted 
       playsinline 
       preload="none" 
+      data-src="Galeria Video 6.mp4"
       style="width: 100%; border-radius: 10px; cursor: pointer;" 
-      onclick="abrirLightbox(this.src)">
+      onclick="abrirVideoLightbox(this)">
       <source src="Galeria Video 6.mp4" type="video/mp4">
       Seu navegador não suporta vídeos.
     </video>
@@ -704,6 +708,11 @@ const swiper = new Swiper('.swiper', {
   <span onclick="fecharLightbox()" style="position:absolute; top:20px; right:30px; font-size:35px; color:white; cursor:pointer;">&times;</span>
   <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; border-radius:10px;">
 </div>
+<!-- Lightbox de Vídeo -->
+<div id="lightbox-video-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background-color:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:9999;">
+  <span onclick="fecharLightboxVideo()" style="position:absolute; top:20px; right:30px; font-size:35px; color:white; cursor:pointer;">&times;</span>
+  <video id="lightbox-video" controls autoplay style="max-width:90%; max-height:90%; border-radius:10px;"></video>
+</div>
 
 </body>
 <script>
@@ -714,6 +723,22 @@ const swiper = new Swiper('.swiper', {
 
   function fecharLightbox() {
     document.getElementById("lightbox-modal").style.display = "none";
+  }
+</script>
+<script>
+  function abrirLightboxVideo(videoElement) {
+    const videoSrc = videoElement.querySelector('source').getAttribute('src');
+    const lightboxVideo = document.getElementById("lightbox-video");
+    lightboxVideo.src = videoSrc;
+    document.getElementById("lightbox-video-modal").style.display = "flex";
+  }
+
+  function fecharLightboxVideo() {
+    const lightboxVideo = document.getElementById("lightbox-video");
+    lightboxVideo.pause();
+    lightboxVideo.currentTime = 0;
+    lightboxVideo.src = "";
+    document.getElementById("lightbox-video-modal").style.display = "none";
   }
 </script>
 
